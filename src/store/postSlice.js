@@ -4,7 +4,7 @@ import PostService from "../services/postService";
 
 const initialState = {
   posts: [],
-  status: 'loading',
+  status: 'idle',
   errorMessage: "",
   token: null
 }
@@ -23,19 +23,21 @@ export const postSlice = createSlice({
 
   },
   extraReducers: (builder) => {
-
-    builder.addCase(fetchPosts.pending, (items, action) => {
+    
+    builder
+      
+    .addCase(fetchPosts.pending, (items, action) => {
       items.status = 'loading';
      
-    }),
+    })
       
-    builder.addCase(fetchPosts.fulfilled, (items, action) => {
+    .addCase(fetchPosts.fulfilled, (items, action) => {
       items.status = 'fulfilled';
       items.posts = action.payload;
       
-    }),
+    })
       
-    builder.addCase(fetchPosts.rejected, (items, action) => {
+    .addCase(fetchPosts.rejected, (items, action) => {
       items.status = 'rejected';
       items.errorMessage = action.payload;
       
@@ -55,12 +57,10 @@ export const getPostStatus = (state) => state.posts.status
 export const getToken = (state) => state.user.token;
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  try {
+ 
     const res = await PostService.getAllPosts(getToken)
     return res.data
-  } catch {
-    return "Something went wrong"
-  }
+ 
 })
 
 export default postReducer;

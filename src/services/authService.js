@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../constant/constant";
+import { generateHttpOption } from "../helper/helper";
 
 export default class AuthService {
 
@@ -17,7 +18,9 @@ export default class AuthService {
         ContentType: 'application/json',
         Authorization: 'Bearer' + token,
       }
-    }
-    )
+    });
   }
+
+  static checkToken = (token) => axios.get(BASE_URL + 'auth/me', generateHttpOption(token));
+
 }

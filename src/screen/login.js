@@ -34,6 +34,7 @@ export default function Login({ navigation }) {
       console.log(res.data);
       dispatch(addToken(res.data.access_token))
       setToken(res.data.access_token);
+      AsyncStorage.setItem("token", JSON.stringify(token));
     }).catch(err => console.log(err));
     
     navigation.navigate("Home")

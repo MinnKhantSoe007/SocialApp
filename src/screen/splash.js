@@ -13,6 +13,16 @@ export default function Splash({ navigation }) {
   const dispatch = useDispatch()
   const token = useSelector(getToken);
 
+  useEffect(() => {
+    const token = AsyncStorage.getItem("token").then(res => JSON.parse(res));
+    token ? checkToken(token) : navigation.navigate("Login")
+  }, []);
+
+  const checkToken = (token) => {
+    AuthService.checkToken(token);
+    navigation.navigate("Home")
+  }
+
   const logout = () => {
     AuthService.logout(token).then(res => {
       console.log(res.data);
