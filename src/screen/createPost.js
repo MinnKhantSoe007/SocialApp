@@ -7,13 +7,14 @@ import { styles } from "./style";
 import PostService from "../services/postService";
 import { useSelector } from "react-redux";
 import { getToken } from "../store/postSlice";
+import { store } from "../store";
 
 export default function CreatePost({navigation}) {
 
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
 
-  const token = useSelector(getToken)
+  const token = store.getState().user.token
 
   const handleOnChangeTitle =text => {
     setTitle(text);
@@ -42,12 +43,12 @@ export default function CreatePost({navigation}) {
       <StatusBar style="auto" />
       
       <View>
-        <Text style={styles.create_para}>What's your title?</Text>
+        <Text style={styles.create_para}>Add Title</Text>
       <TextInput style={styles.create_input} placeholder="Title" value={title} onChangeText={handleOnChangeTitle}/>
       </View>
 
       <View>
-        <Text style={styles.create_para}>What is your body?</Text>
+        <Text style={styles.create_para}>Add Body</Text>
         <TextInput style={styles.create_input} placeholder="Body" value={body} onChangeText={handleOnChangeBody}/>
       </View>
       

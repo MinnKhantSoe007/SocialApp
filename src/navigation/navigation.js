@@ -14,11 +14,11 @@ export default function NavigationStack() {
     
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Splash" component={Splash}/>
-        <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Create account" component={Create}/>
         <Stack.Screen name="Create post" component={CreatePost}/>
-        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="Home" component={Home} options={() => ({ headerLeft: () => null })}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -49,8 +49,9 @@ export default function Create({navigation}) {
     }
     AuthService.createUser(payload).then(res => {
       console.log(res.data);
+      navigation.navigate("Login");
     }).catch(err => console.log(err));
-    navigation.navigate("Splash");
+    
   }
 
   return (
