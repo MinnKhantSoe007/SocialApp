@@ -5,16 +5,17 @@ import { Button, TextInput } from "react-native";
 import { View, Text } from "react-native";
 import { styles } from "./style";
 import PostService from "../services/postService";
-import { useSelector } from "react-redux";
-import { getToken } from "../store/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addPosts, getToken } from "../store/postSlice";
 import { store } from "../store";
 
 export default function CreatePost({navigation}) {
 
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
+  const dispatch= useDispatch()
 
-  const token = store.getState().user.token
+  const token = useSelector(getToken);
 
   const handleOnChangeTitle =text => {
     setTitle(text);
@@ -27,14 +28,17 @@ export default function CreatePost({navigation}) {
   }
 
   const createPost = () => {
+    console.log("cc", token)
     const payload = {
       title: title,
       body: body,
     }
-    PostService.createPost(token, payload).then(res => {
+    PostService.createPost(payload, token).then(res => {
       console.log(res.data);
-    }).catch(err => console.log(err));
-    navigation.navigate("Home");
+      dispatch(addPosts(payload));
+      navigation.navigate("Home");
+    }).catch(err => console.log("ERROR", err));
+    
   }
 
   return (

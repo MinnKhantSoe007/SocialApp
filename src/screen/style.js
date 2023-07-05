@@ -33,7 +33,6 @@ export const styles = StyleSheet.create({
   create_button: {
     backgroundColor: '#4267B2',
     borderRadius: 10
-
   },
 
   create_button_text: {
@@ -86,13 +85,24 @@ export const styles = StyleSheet.create({
     paddingTop: 10
   },
 
+  button_container: {
+    position: 'absolute',
+    marginLeft: 230,
+  },
+
   create_post: {
-    marginLeft: 100,
+    
     fontSize: 20,
     backgroundColor: '#4267B2',
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+
+  post_container: {
+    position: 'relative',
+    top: 20,
+    marginBottom: 170
   },
 
   posts: {
@@ -105,14 +115,33 @@ export const styles = StyleSheet.create({
   },
 
   logout: {
+    position: 'absolute',
     alignItems: 'center',
-    marginTop: 100,
-
+    marginTop: 680,
+    marginLeft: 125,
   },
 
   logout_text: {
     color: 'red',
     fontSize: 20
-  }
+  },
+
+  edit_button: {
+    backgroundColor: '#4267B2',
+    borderRadius: 10,
+    marginBottom: 20
+  },
+
+  delete_button: {
+    backgroundColor: '#000',
+    borderRadius: 10
+  },
+
+  delete_button_text: {
+    textAlign: 'center',
+    fontSize: 20,
+    paddingVertical: 10,
+    color: '#fff'
+  },
 
 })

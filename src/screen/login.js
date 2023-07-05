@@ -14,7 +14,24 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
-  const token = store.getState().user.token;
+
+  // useEffect(() => {
+  //   const token = AsyncStorage.getItem("token").then(res=> JSON.parse(res))
+  //   token ? checkToken(token) : navigation.navigate("Login");
+  // }, [])
+  
+  // const checkToken = (token) => {
+  //   AuthService.checkToken(token).then(res => {
+  //     console.log(res.data);
+  //     navigation.navigate("Home");
+
+  //   }).catch( e => {
+  //       console.log(e);
+  //       navigation.navigate("Home");
+  //    }
+  //   ) 
+    
+  // }
 
   const handleOnChangeEmail = text => {
     setEmail(text);
@@ -35,6 +52,7 @@ export default function Login({ navigation }) {
       console.log(res.data);
       dispatch(addToken(res.data.access_token))
       AsyncStorage.setItem("token", JSON.stringify(res.data.access_token));
+      
       navigation.navigate("Home");
     }).catch(err => console.log(err));
     

@@ -6,15 +6,26 @@ const initialState = {
   posts: [],
   status: 'idle',
   errorMessage: "",
-  token: null
+  token: null,
+  id: null
 }
 
 export const postSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
+
     addPosts: (items, action) => {
       items.posts.push(action.payload)
+    },
+
+    deletePosts: (items) => {
+      items.posts = [],
+      items.id = []
+    },
+
+    updatePosts: (items, action) => {
+      items.posts.put(action.payload)
     },
 
     addToken: (items, action) => {
@@ -48,7 +59,8 @@ export const postSlice = createSlice({
 })
 
 const postReducer = postSlice.reducer
-export const { addPosts } = postSlice.actions
+
+export const { addPosts, deletePosts, updatePosts } = postSlice.actions
 
 export const getAllPosts = (state) => state.posts.posts
 
