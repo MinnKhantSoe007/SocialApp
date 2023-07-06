@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { TouchableOpacity, ScrollView } from "react-native";
+import { TouchableOpacity, ScrollView, Alert } from "react-native";
 import { Button, TextInput } from "react-native";
 import AuthService from "../services/authService";
 import { View, Text } from "react-native";
@@ -50,7 +50,12 @@ export default function Create({navigation}) {
     AuthService.createUser(payload).then(res => {
       console.log(res.data);
       navigation.navigate("Login");
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+      Alert.alert('Error', 'Check the information you have filled again.', [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    });
     
   }
 

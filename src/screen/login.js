@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native";
-import { TextInput, TouchableOpacity, Text, View } from "react-native";
+import { TextInput, TouchableOpacity, Text, View, Alert } from "react-native";
 import AuthService from "../services/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./style";
@@ -52,9 +52,13 @@ export default function Login({ navigation }) {
       console.log(res.data);
       dispatch(addToken(res.data.access_token))
       AsyncStorage.setItem("token", JSON.stringify(res.data.access_token));
-      
       navigation.navigate("Home");
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+      Alert.alert('Error', 'Check your email and password again.', [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    });
     
     
   }

@@ -7,10 +7,10 @@ const initialState = {
   status: 'idle',
   errorMessage: "",
   token: null,
-  id: null
 }
 
 export const postSlice = createSlice({
+
   name: 'posts',
   initialState,
   reducers: {
@@ -19,13 +19,15 @@ export const postSlice = createSlice({
       items.posts.push(action.payload)
     },
 
-    deletePosts: (items) => {
-      items.posts = [],
-      items.id = []
+    deletePosts: (items, id) => {
+      items.posts = items.posts.filter(n => n.id !== id);
     },
 
-    updatePosts: (items, action) => {
-      items.posts.put(action.payload)
+    updatePosts: (items, id, action) => {
+      const index = items.posts.findIndex(n => n.id === id);
+      if (index !== -1) {
+        items.posts[index] = action.payload;
+      }
     },
 
     addToken: (items, action) => {

@@ -144,4 +144,47 @@ export const styles = StyleSheet.create({
     color: '#fff'
   },
 
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  
+  modalView: {
+    marginTop: 30,
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    padding: 40,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
+    elevation: 9,
+  },
+
+  modal_button_deleteStyle: {
+    color: 'red',
+    textAlign: 'center',
+    paddingHorizontal: 50
+  },
+
+  modal_button_cancelStyle: {
+    color: 'blue',
+    textAlign: 'center',
+    paddingHorizontal: 50
+  },
+  
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+
+  modal_button_container: {
+    flexDirection: 'row',
+  }
+
 })

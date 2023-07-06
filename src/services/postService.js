@@ -8,7 +8,11 @@ export default class PostService {
   
   static createPost = (payload, token) => axios.post(BASE_URL + 'blog-posts', payload, generateHttpOption(token));
 
-  static deletePost = (id, token) => axios.delete(BASE_URL + 'blog-posts', id, generateHttpOption(token));
+  static deletePost = (id, token) => {
+    console.log("URL", BASE_URL + 'blog-posts/' + id);
+    console.log("TOKEN", token);
+    return axios.delete(BASE_URL + 'blog-posts/'+id, generateHttpOption(token)); 
+  }
 
-  static updatePost = (id, token) => axios.put(BASE_URL + 'blog-posts', id, generateHttpOption(token));
+  static updatePost = (id, payload, token) => axios.put(BASE_URL + 'blog-posts/'+id, payload, generateHttpOption(token));
 }

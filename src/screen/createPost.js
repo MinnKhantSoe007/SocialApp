@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { TouchableOpacity, ScrollView } from "react-native";
+import { TouchableOpacity, ScrollView, Alert } from "react-native";
 import { Button, TextInput } from "react-native";
 import { View, Text } from "react-native";
 import { styles } from "./style";
@@ -34,10 +34,15 @@ export default function CreatePost({navigation}) {
       body: body,
     }
     PostService.createPost(payload, token).then(res => {
-      console.log(res.data);
-      dispatch(addPosts(payload));
+      console.log("Post Data", res.data);
+      dispatch(addPosts(res.data));
       navigation.navigate("Home");
-    }).catch(err => console.log("ERROR", err));
+    }).catch(err => {
+      console.log("ERROR", err);
+      Alert.alert('Error', 'you cannot leave the input field empty.', [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    });
     
   }
 

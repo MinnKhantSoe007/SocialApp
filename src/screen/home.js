@@ -10,6 +10,7 @@ import { fetchPosts } from "../store/postSlice";
 import { store } from "../store";
 import { styles } from "./style";
 import AuthService from "../services/authService";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function Home({navigation, route}) {
 
@@ -18,12 +19,14 @@ export default function Home({navigation, route}) {
   const userInfo = useSelector(getUserInfo)
   const postStatus = useSelector(getPostStatus);
   const token = store.getState().user.token;
+  const isFocus = useIsFocused();
 
   useEffect(() => {
     if (postStatus == 'idle') {
       dispatch(fetchPosts(token))
     }
-  }, [postStatus]);
+    console.log(userInfo.name)
+  }, [postStatus, isFocus]);
 
   const logout = () => {
     AuthService.logout(token).then(res => {
@@ -40,10 +43,11 @@ export default function Home({navigation, route}) {
   const renderPostItem = ({item}) => {
     return (
      
-      <TouchableOpacity onPress={() => { navigation.navigate("Edit post", {item})}} style={styles.posts}>
+      <TouchableOpacity onPress={() => { navigation.navigate("Edit post", { item }) }} style={styles.posts}>
         <View>
           <Text>{item.title}</Text>
           <Text>{item.body}</Text>
+          <Text style={{display: 'flex'}}>{item.id}</Text>
         </View>
 
         </TouchableOpacity>
