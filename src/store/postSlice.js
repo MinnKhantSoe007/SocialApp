@@ -36,27 +36,25 @@ export const postSlice = createSlice({
 
   },
   extraReducers: (builder) => {
-    
+
     builder
-      
-    .addCase(fetchPosts.pending, (items, action) => {
-      items.status = 'loading';
-     
-    })
-      
-    .addCase(fetchPosts.fulfilled, (items, action) => {
-      items.status = 'fulfilled';
-      items.posts = action.payload;
-      
-    })
-      
-    .addCase(fetchPosts.rejected, (items, action) => {
-      items.status = 'rejected';
-      items.errorMessage = action.payload;
-      
-    })
-      
-      
+
+      .addCase(fetchPosts.pending, (items, action) => {
+        items.status = 'loading';
+
+      })
+
+      .addCase(fetchPosts.fulfilled, (items, action) => {
+        items.status = 'fulfilled';
+        items.posts = action.payload;
+
+      })
+
+      .addCase(fetchPosts.rejected, (items, action) => {
+        items.status = 'rejected';
+        items.errorMessage = action.payload;
+
+      })
   }
 })
 
@@ -71,10 +69,10 @@ export const getPostStatus = (state) => state.posts.status
 export const getToken = (state) => state.user.token;
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
- 
-    const res = await PostService.getAllPosts(getToken)
-    return res.data
- 
+
+  const res = await PostService.getAllPosts(getToken)
+  return res.data
+
 })
 
 export default postReducer;

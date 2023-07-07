@@ -11,7 +11,6 @@ import { getToken, addToken, addUser } from "../store/userSlice";
 export default function Splash({ navigation }) {
 
   const dispatch = useDispatch()
-  // const token = useSelector(getToken);
 
   useEffect(() => {
     AsyncStorage.getItem("token").then(res => {
@@ -19,36 +18,36 @@ export default function Splash({ navigation }) {
       console.log("aa", token)
       token ? checkToken(token) : navigation.navigate("Login");
     })
- }, [])
+  }, [])
 
-    const checkToken = (token) => {
-      console.log("Token", token)
-      AuthService.checkToken(token).then(res => {
-        dispatch(addToken(token));
-        dispatch(addUser(res.data));
-        console.log("ResData", res.data);
-        navigation.navigate("Home");
+  const checkToken = (token) => {
+    console.log("Token", token)
+    AuthService.checkToken(token).then(res => {
+      dispatch(addToken(token));
+      dispatch(addUser(res.data));
+      console.log("ResData", res.data);
+      navigation.navigate("Home");
 
-      }).catch(e => {
-        console.log("error", e);
-        navigation.navigate("Login");
-      }
-      )
-
+    }).catch(e => {
+      console.log("error", e);
+      navigation.navigate("Login");
     }
-
-    const logout = () => {
-      AuthService.logout(token).then(res => {
-        console.log(res.data);
-        AsyncStorage.setItem("token", "");
-      }).catch(err => console.log(err));
-    }
-
-    return (
-      <SafeAreaView style={styles.container}>
-
-        <ActivityIndicator size='large' color='#000'/>
-
-      </SafeAreaView>
     )
   }
+
+  const logout = () => {
+    AuthService.logout(token).then(res => {
+      console.log(res.data);
+      AsyncStorage.setItem("token", "");
+    }).catch(err => console.log(err));
+  }
+
+  return (
+
+    <SafeAreaView style={styles.container}>
+
+      <ActivityIndicator size='large' color='#000' />
+
+    </SafeAreaView>
+  )
+}

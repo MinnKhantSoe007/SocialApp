@@ -15,24 +15,6 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const token = AsyncStorage.getItem("token").then(res=> JSON.parse(res))
-  //   token ? checkToken(token) : navigation.navigate("Login");
-  // }, [])
-  
-  // const checkToken = (token) => {
-  //   AuthService.checkToken(token).then(res => {
-  //     console.log(res.data);
-  //     navigation.navigate("Home");
-
-  //   }).catch( e => {
-  //       console.log(e);
-  //       navigation.navigate("Home");
-  //    }
-  //   ) 
-    
-  // }
-
   const handleOnChangeEmail = text => {
     setEmail(text);
     console.log("email", text)
@@ -43,7 +25,7 @@ export default function Login({ navigation }) {
     console.log("password", text)
   };
 
-  const login = async() => {
+  const login = async () => {
     const loginData = {
       email: email,
       password: password
@@ -56,11 +38,9 @@ export default function Login({ navigation }) {
     }).catch(err => {
       console.log(err);
       Alert.alert('Error', 'Check your email and password again.', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
       ]);
     });
-    
-    
   }
 
   return (
@@ -68,22 +48,17 @@ export default function Login({ navigation }) {
     <SafeAreaView style={styles.login_container}>
 
       <StatusBar style="auto" />
-      
-     
+
       <TextInput style={styles.create_input} placeholder="email" value={email} onChangeText={handleOnChangeEmail} />
-     
+
       <TextInput style={styles.create_input} secureTextEntry={true} placeholder="password" value={password} onChangeText={handleOnChangePassword} />
-      
-      
 
       <TouchableOpacity style={styles.login_button} onPress={login}><Text style={styles.login_button_text}>Login</Text></TouchableOpacity>
 
-      <TouchableOpacity style={styles.create_new_button} onPress={()=> navigation.navigate("Create account")}><Text style={styles.create_new_button_text}>Create New Account</Text></TouchableOpacity>
-
-
+      <TouchableOpacity style={styles.create_new_button} onPress={() => navigation.navigate("Create account")}><Text style={styles.create_new_button_text}>Create New Account</Text></TouchableOpacity>
 
     </SafeAreaView>
-    
-    
-    )
+
+
+  )
 }

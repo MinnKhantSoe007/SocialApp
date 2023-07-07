@@ -11,10 +11,11 @@ import { store } from "../store";
 import { styles } from "./style";
 import AuthService from "../services/authService";
 import { useIsFocused } from "@react-navigation/native";
+import { AntDesign } from '@expo/vector-icons';
 
-export default function Home({navigation, route}) {
+export default function Home({ navigation, route }) {
 
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const postList = useSelector(getAllPosts);
   const userInfo = useSelector(getUserInfo)
   const postStatus = useSelector(getPostStatus);
@@ -35,58 +36,49 @@ export default function Home({navigation, route}) {
       AsyncStorage.setItem("token", "");
       navigation.navigate("Login");
     }).catch(err => console.log(err));
-    
+
   }
 
-  
-
-  const renderPostItem = ({item}) => {
+  const renderPostItem = ({ item }) => {
     return (
-     
+
       <TouchableOpacity onPress={() => { navigation.navigate("Edit post", { item }) }} style={styles.posts}>
         <View>
           <Text>{item.title}</Text>
           <Text>{item.body}</Text>
-          <Text style={{display: 'flex'}}>{item.id}</Text>
+          <Text style={{ display: 'flex' }}>{item.id}</Text>
         </View>
+      </TouchableOpacity>
 
-        </TouchableOpacity>
-       
     )
-  }
-
-  const handleLogout = () => {
-    dispatch(resetUser());
-    AsyncStorage.removeItem("token");
-    navigation.navigate("Login");
   }
 
   return (
     <>
-    <StatusBar />
+      <StatusBar />
       <SafeAreaView style={styles.home_container}>
         <View style={styles.welcome}>
           <Text style={styles.welcome_text}> Hello {userInfo.name} </Text>
-          <TouchableOpacity onPress={()=> navigation.navigate("Create post")} style={styles.button_container}>
+          <TouchableOpacity onPress={() => navigation.navigate("Create post")} style={styles.button_container}>
             <Text style={styles.create_post}>Create Post</Text>
           </TouchableOpacity>
-         
         </View>
-        
-        
-        {postStatus == 'loading' && <ActivityIndicator size='small' color='#000' />} 
-        <View style={styles.post_container}>
-        <FlatList
-          overScrollMode="never"
-          data={postList}
-          renderItem={renderPostItem}
-          keyExtractor={(_, index)=> index}
-        />
-        </View>
-       
 
-        <TouchableOpacity style={styles.logout} onPress={logout}><Text style={styles.logout_text}>Log Out</Text></TouchableOpacity>
+        {postStatus == 'loading' && <ActivityIndicator size='small' color='#000' />}
+        <View style={styles.post_container}>
+          <FlatList
+            overScrollMode="never"
+            data={postList}
+            renderItem={renderPostItem}
+            keyExtractor={(_, index) => index}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.logout} onPress={logout}>
+          <Text style={styles.logout_text}>Log Out   </Text>
+          <AntDesign name="logout" size={20} color="red" />
+        </TouchableOpacity>
       </SafeAreaView>
-      </>
+    </>
   )
 }

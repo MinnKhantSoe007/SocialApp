@@ -14,7 +14,7 @@ export const userSlice = createSlice({
     },
     resetUser: (items) => {
       items.userInfo = {}
-      items.token= null
+      items.token = null
     },
     addToken: (items, action) => {
       console.log("action", action);
@@ -28,6 +28,5 @@ export const { addUser, resetUser, addToken } = userSlice.actions
 
 export const getUserInfo = (state) => state.user.userInfo
 export const getToken = (state) => state.user.token
-
 
 export default userReducer;

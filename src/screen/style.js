@@ -72,8 +72,8 @@ export const styles = StyleSheet.create({
   },
 
   home_container: {
-    marginHorizontal: 15,  
-    marginVertical: 15,  
+    marginHorizontal: 15,
+    marginVertical: 15,
   },
 
   welcome: {
@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
   },
 
   create_post: {
-    
+
     fontSize: 20,
     backgroundColor: '#4267B2',
     borderRadius: 10,
@@ -118,7 +118,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     marginTop: 680,
-    marginLeft: 125,
+    marginLeft: 115,
+    flexDirection: 'row'
   },
 
   logout_text: {
@@ -149,7 +150,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
+
   modalView: {
     marginTop: 30,
     backgroundColor: '#fff',
@@ -177,7 +178,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 50
   },
-  
+
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
